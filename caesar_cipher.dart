@@ -48,6 +48,7 @@ Map getROT13() {
 
 void main() {
   Map<String, String> secretCode = getROT13();
+  //mudar para escolher entre criptografar e descriptogafar;
   print("enter the word:");
   String original = stdin.readLineSync();
   String changed = "";
