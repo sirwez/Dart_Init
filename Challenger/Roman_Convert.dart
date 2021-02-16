@@ -3,20 +3,16 @@
 
 /*
 
-Regras de conversão:
-
-1 - A letra I é utilizada somente antes do V e do X, por exemplo: IV = 4; IX = 9.
-2 - A letra X é utilizada somente antes do L e do C, por exemplo: XL = 40; XC = 90
-3 - A letra C é utilizada somente antes do D e do M, por exemplo, CD = 400; CM = 900
-
-
-4 - As letras I, X, C e M são agrupadas somente seguidas por três vezes, por exemplo: III = 3; XXX = 30.
-5 - Para representar números maiores que 4000 usa-se um traço acima das letras, o que significa a multiplicação do número por mil, por exemplo, Números Romanos.
-
-6 - Letras iguais somam-se os valores, por exemplo: II = 2; XX = 20.
-7 - Duas letras diferentes com o menor antes do maior, subtraem-se os seus valores, por exemplo: IV = 4; IX = 9.
-8 - Duas letras diferentes com o maior antes do menor, somam-se os seus valores, por exemplo: VI = 6; XI = 11.
-9 - Se entre duas letras quaisquer existe outra menor, o valor desta pertencerá a letra seguinte a ela, por exemplo: XIX = 19; LIV = 54.
+Conversion rules:
+1 -The letter I is used only before V and X, for example: IV = 4; IX = 9.
+2 -The letter X is used only before L and C, for example: XL = 40; XC = 90
+3 -The letter C is used only before D and M, for example, CD = 400; CM = 900
+4 -The letters I, X, C and M are grouped only followed three times, for example: III = 3; XXX = 30.
+5 -To represent numbers greater than 4000, a dash above the letters is used, which means multiplying the number by a thousand, for example, Roman Numbers.
+6 -Equal letters add up the values, for example: II = 2; XX = 20.
+7 -Two different letters with the smallest before the largest, subtract their values, for example: IV = 4; IX = 9.
+8 -Two different letters with the largest one before the smallest one, their values ​​are added, for example: VI = 6; XI = 11.
+9 -If there is a smaller one between any two letters, its value will belong to the letter following it, for example: XIX = 19; LIV = 54.
 
 */
 
@@ -24,44 +20,52 @@ import 'dart:io';
 
 void romanToDecimal(String num) {
   const Map<String, int> Roman = {
-    'I': 1,
-    'V': 5,
-    'X': 10,
-    'L': 50,
-    'C': 100,
+    'M': 1000,
+    // 'CM': 900,
     'D': 500,
-    'M': 1000
+    //  'CD': 400,
+    'C': 100,
+    // 'XC': 90,
+    'L': 50,
+    //  'XL': 40,
+    'X': 10,
+    // 'IX': 9,
+    'V': 5,
+    // 'IV': 4,
+    'I': 1
   };
-  Set<String> separeted = new Set();
+  List<String> separeted = new List();
   int result = 0;
   for (String part in num.split('')) {
     separeted.add(part);
   }
+
+  print(separeted);
+  var last = 0;
+  var resultLess = 0;
   separeted.forEach((romano) {
     Roman.forEach((k, v) {
       if (romano == k) {
-        if (result == 0) {
+        if (last == 0) {
           result = v;
+        } else if (last < v) {
+          resultLess += v - last;
+          result -= last;
+        } else if (last == v) {
+          result += v;
         } else {
-          if (v > result) {
-            if (romano == "V" || romano == "X") {
-              result = v - result;
-            } else if (romano == "L" || romano == "C") {
-              result = v - result;
-            } else if (romano == "D" || romano == "M") {
-              result = v - result;
-            }
-          }
+          result += v;
         }
-        print(result);
+        last = v;
       }
     });
   });
+  result += resultLess;
   print(result);
 }
 
 void main() {
-  print("Digite o número romano:");
+  print("Enter the Roman number:");
   String roman = stdin.readLineSync().toUpperCase();
   romanToDecimal(roman);
 }
