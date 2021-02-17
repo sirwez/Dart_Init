@@ -14,12 +14,18 @@ Conversion rules:
 8 -Two different letters with the largest one before the smallest one, their values ​​are added, for example: VI = 6; XI = 11.
 9 -If there is a smaller one between any two letters, its value will belong to the letter following it, for example: XIX = 19; LIV = 54.
 
+
+Problems:
+
+Code does not comply with rule 4, because if you put a value like "IIII", the result would be 4, I intend to fix this problem in the future.
+
 */
 
 import 'dart:io';
 
 void romanToDecimal(String num) {
   const Map<String, int> Roman = {
+    //map with roman values ​​and their respective decimals.
     'M': 1000,
     // 'CM': 900,
     'D': 500,
@@ -35,28 +41,34 @@ void romanToDecimal(String num) {
     'I': 1
   };
   List<String> separeted = new List();
-  int result = 0;
+  int result = 0; //result of transformation
   for (String part in num.split('')) {
+    //separates the input values ​​to be compared later.
     separeted.add(part);
   }
 
   print(separeted);
-  var last = 0;
+  var last =
+      0; //check the last value read to compare with the current one and know if I should subtract.
   var resultLess = 0;
   separeted.forEach((romano) {
     Roman.forEach((k, v) {
+      //'K' Roman value, 'V' decimal value
       if (romano == k) {
         if (last == 0) {
+          //if last == 0, then it is in the first interaction, so I assign the value directly.
           result = v;
         } else if (last < v) {
+          //if last is less than v, it means that we have a case like "CM", "XC" and etc ... so we have to subtract the values (rules: 1,2,3 and 9)
           resultLess += v - last;
           result -= last;
         } else if (last == v) {
+          //if last == v then we have rule 6
           result += v;
         } else {
           result += v;
         }
-        last = v;
+        last = v; //
       }
     });
   });
