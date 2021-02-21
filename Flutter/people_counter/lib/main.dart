@@ -2,13 +2,29 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: "Contador de Pessoas",
+    title: "People Counter",
     home: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text("Pessoas: 0",
+        Text("People: 0",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        Text("Pode entrar pcr!!",
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          FlatButton(
+              child: Text("-1",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 20.0)),
+              onPressed: () {}),
+          FlatButton(
+              child: Text("+1",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 20.0)),
+              onPressed: () {}),
+        ]),
+        Text("You can enter pcr !!",
             style: TextStyle(
                 color: Colors.pink[900],
                 fontStyle: FontStyle.italic,
