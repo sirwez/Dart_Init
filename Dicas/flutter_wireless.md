@@ -1,4 +1,5 @@
-# Flutter WiFi
+# Connect to Android with ADB
+
 
 *Connect the USB to the device and follow the steps below:*
 
