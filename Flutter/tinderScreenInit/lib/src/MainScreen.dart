@@ -48,7 +48,7 @@ class mainScreen extends StatelessWidget {
                         ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40.0),
-                            side: BorderSide(color: Colors.red)),
+                            side: BorderSide(color: Colors.white)),
                       ),
                       borderRadius: BorderRadius.circular(46.0),
                       elevation: 20,
